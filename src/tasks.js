@@ -8,13 +8,18 @@ export const STATUS_LABELS = {
   done: "Done",
 };
 
+export const PEOPLE = {
+  kiko: { name: "Kiko", color: "#58a6ff" },
+  sam: { name: "Sam", color: "#f0883e" },
+};
+
 export const tasks = [
-  { id: 1, title: "Write onboarding checklist", status: "todo", assignee: "Kiko" },
-  { id: 2, title: "Fix login redirect on Safari", status: "doing", assignee: "Sam" },
-  { id: 3, title: "Draft Q3 roadmap", status: "todo", assignee: "Sam" },
-  { id: 4, title: "Set up error alerts", status: "done", assignee: "Kiko" },
-  { id: 5, title: "Review pricing page copy", status: "doing", assignee: "Kiko" },
-  { id: 6, title: "Archive old staging data", status: "todo", assignee: "Sam" },
+  { id: 1, title: "Write onboarding checklist", status: "todo", owner: PEOPLE.kiko },
+  { id: 2, title: "Fix login redirect on Safari", status: "doing", owner: PEOPLE.sam },
+  { id: 3, title: "Draft Q3 roadmap", status: "todo", owner: PEOPLE.sam },
+  { id: 4, title: "Set up error alerts", status: "done", owner: PEOPLE.kiko },
+  { id: 5, title: "Review pricing page copy", status: "doing", owner: PEOPLE.kiko },
+  { id: 6, title: "Archive old staging data", status: "todo", owner: PEOPLE.sam },
 ];
 
 export function byStatus(list, status) {
@@ -22,5 +27,5 @@ export function byStatus(list, status) {
 }
 
 export function assignedTo(list, person) {
-  return list.filter((task) => task.assignee === person);
+  return list.filter((task) => task.owner.name === person);
 }
