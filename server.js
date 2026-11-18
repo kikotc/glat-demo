@@ -3,6 +3,11 @@ import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 
+const USERS = [
+  { id: "kiko", name: "Kiko", role: "frontend" },
+  { id: "sam", name: "Sam", role: "backend" },
+];
+
 const TASKS = [
   { id: 1, title: "Write onboarding checklist", status: "todo", owner: "Kiko" },
   { id: 2, title: "Fix login redirect on Safari", status: "doing", owner: "Sam" },
@@ -18,6 +23,26 @@ const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/cs
 
 createServer(async (req, res) => {
   const url = new URL(req.url, "http://localhost");
+
+  if (url.pathname === "/api/health") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ ok: true, uptime: process.uptime() }));
+    return;
+  }
+
+  if (url.pathname === "/api/users") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(USERS));
+    return;
+  }
+
+  const match = url.pathname.match(/^\/api\/tasks\/(\d+)$/);
+  if (match) {
+    const task = TASKS.find((t) => t.id === Number(match[1]));
+    res.writeHead(task ? 200 : 404, { "content-type": "application/json" });
+    res.end(JSON.stringify(task ?? { error: "not found" }));
+    return;
+  }
 
   if (url.pathname === "/api/tasks") {
     res.writeHead(200, { "content-type": "application/json" });
