@@ -11,7 +11,7 @@
 
 body {
   margin: 0;
-  font: 15px/1.45 system-ui, -apple-system, sans-serif;
+  font: 16px/1.45 system-ui, -apple-system, sans-serif;
   color: var(--ink);
   background: var(--bg);
 }
@@ -59,8 +59,8 @@ h1 { margin: 0; font-size: 20px; }
 }
 
 .card {
-  margin-bottom: 10px;
-  padding: 12px 14px;
+  margin-bottom: 12px;
+  padding: 16px 18px;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--card);

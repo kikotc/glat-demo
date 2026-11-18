@@ -10,9 +10,8 @@ let activeFilter = "all";
 function card(task) {
   const element = document.createElement("article");
   element.className = "card";
-  element.innerHTML = `<p></p><div class="meta"></div>`;
+  element.innerHTML = `<p></p>`;
   element.querySelector("p").textContent = task.title;
-  element.querySelector(".meta").textContent = task.assignee;
   return element;
 }
 
