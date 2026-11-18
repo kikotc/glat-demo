@@ -1,6 +1,7 @@
 // The client for the task API.
 
-export async function getTasks() {
-  const res = await fetch("/api/tasks");
+// One page of tasks: { items, next }. Pass `next` back as the cursor for the page after.
+export async function getTasks(cursor = 0) {
+  const res = await fetch(`/api/tasks?cursor=${cursor}`);
   return res.json();
 }

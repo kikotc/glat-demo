@@ -41,5 +41,5 @@ function render() {
 }
 
 renderHeader(document.querySelector("header"));
-tasks = await getTasks();
+tasks = (await getTasks()).items;
 render();

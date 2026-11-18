@@ -17,6 +17,7 @@ const TASKS = [
   { id: 6, title: "Archive old staging data", status: "todo", owner: "Sam" },
 ];
 
+const PAGE_SIZE = 20;
 const PORT = Number(process.env.PORT ?? 4173);
 
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css" };
@@ -45,8 +46,11 @@ createServer(async (req, res) => {
   }
 
   if (url.pathname === "/api/tasks") {
+    const start = Number(url.searchParams.get("cursor") ?? 0);
+    const items = TASKS.slice(start, start + PAGE_SIZE);
+    const next = start + PAGE_SIZE < TASKS.length ? start + PAGE_SIZE : null;
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify(TASKS));
+    res.end(JSON.stringify({ items, next }));
     return;
   }
 
