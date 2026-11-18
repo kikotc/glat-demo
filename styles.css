@@ -69,3 +69,15 @@ h1 { margin: 0; font-size: 20px; }
 .card p { margin: 0; }
 
 .card .meta { margin-top: 6px; font-size: 13px; color: var(--muted); }
+
+#error {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: #b42318;
+  color: #fff;
+  font: 15px/1.4 ui-monospace, Menlo, monospace;
+}

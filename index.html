@@ -8,10 +8,21 @@
   </head>
   <body>
     <header>
-      <h1>Taskboard</h1>
+      <h1></h1>
       <nav id="filters" aria-label="Filters"></nav>
     </header>
     <main id="board"></main>
+    <div id="error" hidden></div>
+    <script>
+      // Shows uncaught errors on the page while developing, like a dev server overlay.
+      const showError = (message) => {
+        const box = document.getElementById("error");
+        box.textContent = message;
+        box.hidden = false;
+      };
+      addEventListener("error", (e) => showError(e.message));
+      addEventListener("unhandledrejection", (e) => showError(`Uncaught ${e.reason}`));
+    </script>
     <script type="module" src="src/board.js"></script>
   </body>
 </html>

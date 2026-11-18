@@ -1,17 +1,21 @@
 // Draws the board: one column per status, one card per task.
 
-import { tasks, STATUSES, STATUS_LABELS, byStatus } from "./tasks.js";
+import { getTasks } from "./api.js";
+import { STATUSES, STATUS_LABELS, byStatus } from "./tasks.js";
 import { filters, renderFilters } from "./filters.js";
+import { renderHeader } from "./header.js";
 
 const board = document.getElementById("board");
 const filterBar = document.getElementById("filters");
 let activeFilter = "all";
+let tasks = [];
 
 function card(task) {
   const element = document.createElement("article");
   element.className = "card";
-  element.innerHTML = `<p></p>`;
+  element.innerHTML = `<p></p><div class="meta"></div>`;
   element.querySelector("p").textContent = task.title;
+  element.querySelector(".meta").textContent = task.owner;
   return element;
 }
 
@@ -36,4 +40,6 @@ function render() {
   });
 }
 
+renderHeader(document.querySelector("header"));
+tasks = await getTasks();
 render();
